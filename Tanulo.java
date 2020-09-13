@@ -10,8 +10,11 @@ public class Tanulo {
         TanuloLetrehoz ujTanulo = new TanuloLetrehoz("Kiss Janos", 0002);
         TanuloLetrehoz regiTanulo = new TanuloLetrehoz("Bukki Gergely", 0001);  
 
-        regiTanulo.setAtlag(4.8);
+        regiTanulo.setJegyek(4.9, 4.7, 4.3, 4.5, 4.0);
         regiTanulo.setSzak(szakok.INFORMATIKA);
+
+        ujTanulo.setSzak(szakok.MATEMATIKA);
+        ujTanulo.setJegyek(4.1, 5.0, 3.9, 4.0, 3.5);
 
         regiTanulo.Megjelenit();
         ujTanulo.Megjelenit();
@@ -21,7 +24,8 @@ public class Tanulo {
 class TanuloLetrehoz{
     private String nev;
     private int azonosito;
-    private double atlag;
+    private double[] jegyek = new double[5];
+    private double atlag = 0.0;
     private String szakString;
 
     public void setNev(String nev){
@@ -40,12 +44,24 @@ class TanuloLetrehoz{
         return azonosito;
     }
 
-    public void setAtlag(double a){
-        atlag = a;
+    public void setJegyek(double elso, double masodik, double harmadik, double negyedik, double otodik){
+        jegyek[0] = elso;
+        jegyek[1] = masodik;
+        jegyek[2] = harmadik;
+        jegyek[3] = negyedik;
+        jegyek[4] = otodik;
+
     }
 
     public double getAtlag(){
-        return atlag;
+        int index = 0;
+        
+        for (double x : jegyek){
+            atlag += x;
+            index++;
+        }
+
+        return atlag / index;
     }
 
     public void setSzak(szakok szak){
@@ -87,10 +103,10 @@ class TanuloLetrehoz{
     }
 
     public void Megjelenit(){
-        System.out.println("Tanulo neve:"+ nev);
-        System.out.println("Tanulo azonositoja:" + azonosito);
-        System.out.println("Tanulo atlaga:" + atlag);
-        System.out.println("Tanulo szakja:"+ szakString);
+        System.out.println("Tanulo neve:"+ getNev());
+        System.out.println("Tanulo azonositoja:" + getAzonosito());
+        System.out.println("Tanulo atlaga:" + getAtlag());
+        System.out.println("Tanulo szakja:"+ getSzak());
         System.out.println();
     }
 
